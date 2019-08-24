@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+import webpack, {HotModuleReplacementPlugin, NamedModulesPlugin} from 'webpack'
 
 
 module.exports = {
@@ -40,6 +41,7 @@ module.exports = {
             filename: 'index.html', // 生成后的文件名
             template: 'index.html' // 模板文件
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new HotModuleReplacementPlugin() // 还需要这个插件才能完全启动 HMR
     ]
 }
