@@ -1,8 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
-import webpack from 'webpack'
-
+const webpack = require('webpack')
 
 module.exports = {
     mode: 'development',
@@ -13,7 +12,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
     },
-    devtool: 'source-map', // 开启调试
+    // devtool: 'source-map',
     devServer: {
         // 告诉服务器从哪里提供内容，只有你在想要提供静态文件的时候才需要。
         // 默认情况下，将使用当前工作目录作为提供内容的目录
@@ -24,24 +23,23 @@ module.exports = {
         overlay: true // 当存在编译错误的时候，在浏览器显示全屏覆盖
     },
     module: {
-      rules: [
-          {
-              test: /\.css$/,
-              use: ['style-loader', 'css-loader']
-          }
-      ]
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: "babel-loader",
+                options: {
+                    "presets": [["@babel/preset-env",  {useBuiltIns: 'usage'}]]
+                }
+            }
+        ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            minify: {
-                removeComments: true, // 移除html的注释
-                collapseWhitespace: true, // 删除空白与换行符
-                minifyCSS: true // 压缩css
-            },
-            filename: 'index.html', // 生成后的文件名
-            template: 'index.html' // 模板文件
+            template: 'index.html',
+            filename: 'index.html',
         }),
         new CleanWebpackPlugin(),
-        new webpack.HotModuleReplacementPlugin() // 还需要这个插件才能完全启动 HMR
+        new webpack.HotModuleReplacementPlugin()
     ]
 }
