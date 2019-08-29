@@ -1,4 +1,4 @@
-require('@babel/polyfill')
+// require('@babel/polyfill')
 const arr = [
     new Promise(() => {}),
     new Promise(() => {})
