@@ -12,11 +12,32 @@ module.exports = {
         chunkFilename: '[name].js' // 代码拆分后的文件名
     },
     optimization: {
-        splitChunks: {
-            chunks: 'all', // 分割所有代码
+        splitChunks:  {
+            chunks: 'async',
+            minSize: 30000,
+            maxSize: 0,
+            minChunks: 1,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+            automaticNameDelimiter: '~',
+            automaticNameMaxLength: 30,
+            name: true,
             cacheGroups: {
                 vendors: {
-                    name: 'vendors'
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: -10,
+                },
+                commons: {
+                    name: 'commons',
+                    minSize: 0, //表示在压缩前的最小模块大小,默认值是 30kb
+                    minChunks: 2, // 最小公用次数
+                    priority: 5, // 优先级
+                    reuseExistingChunk: true // 公共模块必开启
+                },
+                default: {
+                    minChunks: 2,
+                    priority: -20,
+                    reuseExistingChunk: true
                 }
             }
         }
