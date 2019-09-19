@@ -17,7 +17,7 @@ module.exports = {
         options: {
           name: '[name].[ext]',
           outputPath: 'images/', // 文件的输出目录
-          limit: 1000 // 把小于 100kb 的图片转为 base64
+          limit: 102400 // 把小于 100kb 的图片转为 base64
         }
       }
     }]
