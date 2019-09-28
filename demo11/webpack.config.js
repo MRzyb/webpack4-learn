@@ -14,6 +14,14 @@ module.exports = {
         filename: 'bundle.js',
         chunkFilename: '[name].chunk.js'
     },
+    devtool: 'source-map',
+    devServer: {
+        contentBase: './dist',
+        port: 9000,
+        open: true,
+        hot: true,
+        overlay: true
+    },
     module: {
         rules: [
             {
