@@ -5,7 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
-    mode: 'development',
     entry: {
         main: './src/index.js'
     },
@@ -13,6 +12,19 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
         chunkFilename: '[name].chunk.js'
+    },
+    devtool: 'source-map',
+    devServer: {
+        contentBase: './dist',
+        port: 9000,
+        open: true,
+        hot: true,
+        overlay: true,
+    },
+    optimization: {
+      splitChunks: {
+          chunks: 'all'
+      }
     },
     module: {
         rules: [
@@ -30,9 +42,10 @@ module.exports = {
             {
                 test: /\.(css|scss)$/,
                 use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader // 把 style-loader 换成了 MiniCssExatractPlugin.loader
-                    },
+                    // {
+                        //     loader: MiniCssExtractPlugin.loader // 把 style-loader 换成了 MiniCssExatractPlugin.loader
+                    // },
+                    'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -47,6 +60,11 @@ module.exports = {
                     },
                     'sass-loader'
                 ]
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader'
             }
         ]
     },
