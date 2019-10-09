@@ -2,7 +2,7 @@
   "name": "demo12",
   "version": "1.0.0",
   "description": "",
-  "main": "weboack.config.js",
+  "main": "webpack.config.js",
   "scripts": {
     "dev": "webpack --mode development"
   },
