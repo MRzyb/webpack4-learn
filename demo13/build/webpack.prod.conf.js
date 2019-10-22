@@ -38,11 +38,16 @@ const prodConfig = {
                 jquery: {
                     name: 'jquery', // 单独将 jquery 拆包
                     priority: 15,
-                    test: /[\\/]node_modules[\\/]jquery[\\/]/
+                    test: /[\\/]node_modules[\\/](jquery)[\\/]/
                 },
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendors'
+                },
+                default: {
+                    minChunks: 1,
+                    priority: -20,
+                    reuseExistingChunk: true
                 }
             }
         }

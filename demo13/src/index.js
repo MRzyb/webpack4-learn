@@ -1,6 +1,9 @@
 
 import './assets/style/base.scss'
 import './assets/fonts/iconfont.css' // 引入字体文件
+import _ from 'lodash'
+
+console.log(_.join([1,2], '***'))
 
 
 // 发送跨域请求
